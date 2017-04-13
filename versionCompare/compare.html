@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function versionCompare(v1, v2) {
+        if (!v1 || !v2) {
+            return
+        }
+        if (v1 == v2) {
+            return console.log(v1 + '=' + v2)
+        }
+        var letterV1 = v1.toString().match(/[a-zA-Z]/g)
+        var letterV2 = v2.toString().match(/[a-zA-Z]/g)
+        if (letterV1.toString() !== letterV2.toString()) {
+            return console.log(v1+'和'+v2+'不是同一程序')
+        }
+        var arr1 = v1.toString().replace(/\D/, '').split('.'),
+                arr2 = v2.toString().replace(/\D/, '').split('.')
+        let len1 = arr1.length,
+                len2 = arr2.length,
+                minlength = Math.min(len1, len2)
+        var n = Math.max(len1, len2) - Math.min(len1, len2)
+        for (var j = 0; j < n; j++) {
+            if (len1 > len2) {
+                arr2[minlength + j] = "0"
+            } else if (len1 < len2) {
+                arr1[minlength + j] = "0"
+            }
+        }
+        if (arr1.length == arr2.length) {
+            for (var i = 0; i < arr1.length; i++) {
+                if (Number(arr1[i]) > Number(arr2[i])) {
+                    return console.log(v1 + '>' + v2)
+//                    return true
+                } else if (Number(arr1[i]) < Number(arr2[i])) {
+                    return console.log(v1 + '<' + v2)
+//                    return false
+                }
+            }
+        }
+    }
+    versionCompare('v2.6.1.1', 'v2.6.1')
+    versionCompare('v2.10.1.1', 'v2.6.1')
+    versionCompare('v2.6.1.1', 'v2')
+    versionCompare('v2.6.1.1', 'v2.6.9')
+    versionCompare('v1.7.0', 'v9')
+    versionCompare('v1', 'v1')
+    versionCompare('v1', 'c1')
+</script>
+</body>
+</html>
